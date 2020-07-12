@@ -23,7 +23,11 @@ exports.create = async(req,res)=>{
 exports.findAll = async(req,res)=>{
     Post.find().then(
       (posts)=>{
-        res.status(200).json({posts})
+        // res.status(200).json({posts})
+        res.render('pages/index', {
+          posts: posts,
+          
+        });
       }
     ).catch(
       (error)=>{
