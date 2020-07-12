@@ -1,10 +1,10 @@
 module.exports = app =>{
-    const complaints = require("../controllers/posts.controller")
-    app.post("/complaint",  complaints.create);
-    app.get("/complaint",  complaints.findAll);
-    app.get("/complaint/:id",  complaints.findOne);
-    app.delete("/complaint/:id",   complaints.delete);
-    app.put("/complaint",   complaints.update);
+    const posts = require("../controllers/posts.controller")
+    app.post("/posts",  posts.create);
+    app.get("/posts",  posts.findAll);
+    app.get("/posts/:id",  posts.findOne);
+    app.delete("/posts/:id",   posts.delete);
+    app.put("/posts",   posts.update);
    
     
 }

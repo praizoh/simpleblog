@@ -1,47 +1,46 @@
-const Complaints = require ("../models/posts.model.js")
-// const uuid = require('uuid')
+const Post = require ("../models/posts.model.js")
+
 
 exports.create = async(req,res)=>{
     const { subject, body, userId } = req.body
-    const complaintId = '9iuyyttt'
     const dateCreated= new Date()
-   const complaint = new Complaints({subject, body, posted_by:userId, complaint_id:complaintId, date_created:dateCreated});
-   complaint.save().then(
+   const post = new Post({subject, body, posted_by:userId, date_created:dateCreated});
+   post.save().then(
     () => {
-        res.status(201).json({
-          message: 'Complaint saved successfully!' 
-        });
+      res.status(201).json({
+        message: 'Complaint saved successfully!' 
+      });
     }
     ).catch(
     (error) => {
-        res.status(400).json({
-          error: error
-        }); 
+      res.status(400).json({
+        error: error
+      }); 
     }
    )
 }
 
 exports.findAll = async(req,res)=>{
-    Complaints.find().then(
-        (complaints)=>{
-            res.status(200).json({complaints})
-        }
+    Post.find().then(
+      (posts)=>{
+        res.status(200).json({posts})
+      }
     ).catch(
-        (error)=>{
-            res.status(400).json({error:error})
-        }
+      (error)=>{
+        res.status(400).json({error:error})
+      }
     )
     
 }
 
 exports.findOne = async(req,res)=>{
-    const {id} = req.params
-    Complaints.findOne({
-        _id: id
+  const {id} = req.params
+    Post.findOne({
+      _id: id
     }).then(
-        (complaint) => {
-        res.status(200).json(complaint);
-        }
+        (post) => {
+        res.status(200).json(post);
+    }
     ).catch(
         (error) => {
         res.status(404).json({
@@ -54,7 +53,7 @@ exports.findOne = async(req,res)=>{
 
 exports.delete = async(req,res)=>{
     const {id} = req.params
-    Complaints.deleteOne({_id:id}).then(
+    Post.deleteOne({_id:id}).then(
         () => {
           res.status(200).json({
             message: 'Deleted!'
@@ -70,15 +69,15 @@ exports.delete = async(req,res)=>{
 }
 
 exports.update = async(req,res)=>{
-    const { subject, body, complaintId, dateCreated, userId, _id} = req.body
+    const { subject, body, _id} = req.body
     console.log(body)
-    const complaint = new Complaints({subject, body, posted_by:userId, complaint_id:complaintId, date_created:dateCreated, _id});
-    Complaints.updateOne({_id}, complaint).then(
-        () => {
-          res.status(201).json({
-            message: 'Complaint updated successfully!'
-          });
-        }
+    const post = new Post({subject, body, _id});
+    Post.updateOne({_id}, post).then(
+      () => {
+        res.status(201).json({
+          message: 'Post updated successfully!'
+        });
+      }
       ).catch(
         (error) => {
           res.status(400).json({
