@@ -35,23 +35,31 @@
     </div>
   </nav>
     <div class="container settings-center"> 
-        <h5>Edit Posts</h5>
+        <h5>Update Post</h5>
         <div class="row">
             <% var message; %>
               <% if(message) { %> 
-                <p class="teal-text">Post successfully updated</p>  
+                <p class="teal-text">Post successfully created</p>  
               <% } %>
-            <form class="col s12" method="post" action="/posts">
+            <% if(post) { %>
+            <form class="col s12" method="post" action="/posts/update">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Subject.." id="subject" type="text" name="_id" value="<%= post.id %>">
+                        <label for="first_name">Id</label>
+                    </div>
+                </div>
               <div class="row">
                 <div class="input-field col s6">
-                    <input placeholder="Subject.." id="subject" type="text" name="subject">
+                    <input placeholder="Subject.." id="subject" type="text" name="subject" value="<%= post.subject %>">
                     <label for="first_name">Subject</label>
                 </div>
                 
               </div>
               <div class="row">
                 <div class="input-field col s6">
-                    <input placeholder="Body.." id="body" type="text" name="body">
+                    <!-- <textarea placeholder="Body.." id="body" type="text" name="body" value="<%= post.body %>" class="materialize-textarea"></textarea> -->
+                    <input placeholder="Body.." id="body" type="text" name="body" value="<%= post.body %>" class="materialize-textarea">
                     <label for="first_name">Body</label>
                 </div>
                 
@@ -60,10 +68,10 @@
                 <i class="material-icons right">send</i>
               </button>
             </form>
+            <% } %>
         </div>
         
     </div>
-    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 

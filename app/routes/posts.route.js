@@ -3,8 +3,8 @@ module.exports = app =>{
     app.post("/posts",  posts.create);
     app.get("/posts",  posts.findAll);
     app.get("/posts/:id",  posts.findOne);
-    app.delete("/posts/:id",   posts.delete);
-    app.put("/posts",   posts.update);
+    app.get("/posts/delete/:id",   posts.delete);
+    app.post("/posts/update",   posts.update);
    
     
 }

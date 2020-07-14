@@ -72,7 +72,7 @@
                     <div class="card-image">
                       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpOE8ceTPRKD7D2h4ACvr3NkMCcV2ntDaK3g&usqp=CAU">
                       <!-- <span class="card-title"><%= post.subject %></span> -->
-                      <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#modal1" data-target="modal1"><i class="material-icons">add</i></a>
+                      <a class="btn-floating halfway-fab waves-effect waves-light red" href="/posts/<%= post.id %>"><i class="material-icons">edit</i></a>
                     </div>
                     <div class="card-content" >
                       <span class="card-title" style="height: 60px;"><%= post.subject %></span>
@@ -80,28 +80,36 @@
                     </div>
                     <div class="card-action">
                       <a href="#">View More..</a>
+                      <a class="waves-effect waves-light modal-trigger" href="/posts/delete/<%= post.id %>"><i class="material-icons red-text right right-align">delete</i></a>
                     </div>
-                  </div>
+                  </div>  
                 </div>
               </div>
              
             </div>
+            
           <% })%> 
             
         </div>
       </section>
+
     <%}%>
+
+   
+        <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Delete Post</h4>
+        <p>You are about to delete a post. Click delete to continue. Or click out of this modal to stop delete</p>
+      </div>
+      <div class="modal-footer">
+        <a href="" class="modal-close waves-effect waves-green btn-flat">Delete</a>
+      </div>
+    </div>
     
-    <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
+    
+    
+    
 
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -113,9 +121,7 @@
 
       // Or with jQuery
 
-      $(document).ready(function(){
-        $('.modal').modal();
-      });
+      
             
     </script>
   

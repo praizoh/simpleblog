@@ -47,7 +47,10 @@ exports.findOne = async(req,res)=>{
       _id: id
     }).then(
         (post) => {
-        res.status(200).json(post);
+          res.render('pages/editposts', {
+            post: post,
+            
+          });
     }
     ).catch(
         (error) => {
@@ -78,12 +81,14 @@ exports.delete = async(req,res)=>{
 
 exports.update = async(req,res)=>{
     const { subject, body, _id} = req.body
-    console.log(body)
+    console.log(req.body)
     const post = new Post({subject, body, _id});
     Post.updateOne({_id}, post).then(
       () => {
-        res.status(201).json({
-          message: 'Post updated successfully!'
+        let msg = 'Post successfully updated' 
+        res.render('pages/index', {
+          message2: msg,
+          
         });
       }
       ).catch(

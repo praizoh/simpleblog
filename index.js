@@ -20,9 +20,9 @@ require('./app/routes/posts.route')(app)
 
   app.get('/', (req,res)=>{
     res.render('pages/index');   
-  }) 
+  })  
 
-  app.get('/addposts', (req,res)=>{
+  app.get('/addposts', (req,res)=>{  
     res.render('pages/createposts');
   })
 
