@@ -66,9 +66,7 @@ exports.delete = async(req,res)=>{
     const {id} = req.params
     Post.deleteOne({_id:id}).then(
         () => {
-          res.status(200).json({
-            message: 'Deleted!'
-          });
+          res.render('pages/index');
         }
       ).catch(
         (error) => {
