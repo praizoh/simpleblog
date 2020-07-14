@@ -1,19 +1,23 @@
 const Post = require ("../models/posts.model.js")
+const uuid = require('uuid') 
 
 
 exports.create = async(req,res)=>{
-    const { subject, body, userId } = req.body
+    const { subject, body } = req.body
+    userId = uuid.v4()
     const dateCreated= new Date()
    const post = new Post({subject, body, posted_by:userId, date_created:dateCreated});
    post.save().then(
     () => {
-      res.status(201).json({
-        message: 'Complaint saved successfully!' 
+      let message = 'Post Created'       
+      res.render('pages/createposts', {
+        message: message,
+        
       });
     }
     ).catch(
     (error) => {
-      res.status(400).json({
+      res.status(400).json({ 
         error: error
       }); 
     }

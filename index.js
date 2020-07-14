@@ -4,6 +4,9 @@ const bodyparser = require('body-parser');
 app.use(bodyparser.json());
 const cors = require("cors");
 app.use(cors()); 
+app.use(express.urlencoded({
+  extended:true
+}))
 let ejs = require('ejs');
 const mongoose = require('mongoose');
 
@@ -13,10 +16,14 @@ app.set('view engine', 'ejs');
 
 // use res.render to load up an ejs view file
 
-require('./app/routes/posts.route')(app)
+require('./app/routes/posts.route')(app) 
 
   app.get('/', (req,res)=>{
-    res.render('pages/index'); 
+    res.render('pages/index');   
+  }) 
+
+  app.get('/addposts', (req,res)=>{
+    res.render('pages/createposts');
   })
 
 // Connect to port
