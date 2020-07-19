@@ -1,13 +1,11 @@
 const Post = require ("../models/posts.model.js")
-const uuid = require('uuid') 
+const uuid = require('uuid')  
 
 
 exports.create = async(req,res)=>{
-    const { subject, body } = req.body
-    userId = uuid.v4()
-    const dateCreated= new Date()
-   const post = new Post({subject, body, posted_by:userId, date_created:dateCreated});
-   post.save().then(
+  const { subject, body, postedBy, categories } = req.body
+  const post = new Post({subject, body, posted_by:postedBy, categories});
+  post.save().then(
     () => {
       let message = 'Post Created'       
       res.render('pages/createposts', {
@@ -15,13 +13,14 @@ exports.create = async(req,res)=>{
         
       });
     }
-    ).catch(
+    )
+    .catch(
     (error) => {
       res.status(400).json({ 
         error: error
       }); 
     }
-   )
+  )
 }
 
 exports.findAll = async(req,res)=>{

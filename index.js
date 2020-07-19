@@ -17,6 +17,7 @@ app.set('view engine', 'ejs');
 // use res.render to load up an ejs view file
 
 require('./app/routes/posts.route')(app) 
+require('./app/routes/users.route')(app) 
 
   app.get('/', (req,res)=>{
     res.render('pages/index');   
@@ -31,7 +32,7 @@ const port = process.env.PORT || 8085
 
 app.listen(port, ()=> console.log(`listening on port ${port}...`));
 // mongoose.connect('mongodb+srv://profinder_application_db:mAbDA4o5vpC4pJ8p@cluster0-o8sgf.mongodb.net/test?retryWrites=true&w=majority')
-mongoose.connect('mongodb+srv://sca:ySwems6Q87IRzoi5@cluster0.q88tk.mongodb.net/simple_blog?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://sca:ySwems6Q87IRzoi5@cluster0.q88tk.mongodb.net/simple_blog?retryWrites=true&w=majority', { useNewUrlParser: true })
   .then(() => { 
     console.log('Successfully connected to MongoDB Atlas!'); 
   }) 
