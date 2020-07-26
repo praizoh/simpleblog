@@ -179,8 +179,14 @@ exports.delete = async(req,res)=>{
     if(id){
         try{
             const user = await User.delete(id)
+            const users = await User.findAll()
+            console.log(users)
+            res.render('pages/manageusers', {
+                users:users,
+                message:'User Account Deleted Successfully'
+            })
             
-                res.status(200).send({message:'user deleted'})
+            
             
             
         }catch(err){

@@ -67,7 +67,7 @@ User.findOne = async(id)=>{
 
 User.findAll = async()=>{
     try{
-        const users = await Users.find()
+        const users = await Users.find().sort({date_created: -1})
         return users
     }catch(err){
         console.log(err)

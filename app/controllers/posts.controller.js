@@ -25,7 +25,7 @@ exports.create = async(req,res)=>{
 
 exports.findAll = async(req,res)=>{
   console.log(req.headers)
-    Post.find().then(
+    Post.find().sort({date_created: -1}).then(
       (posts)=>{
         // res.status(200).json({posts})
         res.render('pages/index', {
@@ -81,7 +81,7 @@ exports.viewers = async(req,res)=>{
   try{
     const post = await Post.findOne({_id: id}).populate('posted_by')
     // console.log(post)
-    const comment= await Comment.find({'post':id}).populate('commented_by')
+    const comment= await Comment.find({'post':id}).sort({date_created: -1}).populate('commented_by')
     // console.log(comment)
     res.render('pages/viewersPost', {
       post: post,  

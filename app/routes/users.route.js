@@ -18,7 +18,7 @@ module.exports = app =>{
     app.post("/users/update", verifyToken, users.update)
 
     // delete a user
-    app.delete("/users/:id", verifyToken, users.delete)
+    app.get("/users/delete/:id",  users.delete)
 
 
 }

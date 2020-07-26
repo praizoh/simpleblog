@@ -70,18 +70,23 @@
     <main>
         <% var users; %>
         <div class="container">
+            <h4 class="teal-text">MANAGE USERS</h4>
             <div>
+                <% var message; %>
+                <% if(message) { %> 
+                  <p class="red-text center-align"><%= message %> !!!</p>  
+                <% } %>
                 <ul class="collection">
                     <% if(users!=null){ %>
                     <% users.forEach(function(user) { %>
                         <li class="collection-item avatar">
                         <img src="https://materializecss.com/images/yuna.jpg" alt="" class="circle">
-                        <span class="title"><%= user.firstname %> <%= user.lastname  %></span>
-                        <p><%= user.email  %><br>
-                            <%= user.isAdmin %><br>
+                        <span class="title">Fullname: <%= user.firstname %> <%= user.lastname  %></span>
+                        <p>Email: <%= user.email  %><br>
+                           Admin: <%= user.isAdmin %><br>
                             <%= user.date_created %><br>
                         </p>
-                        <a href="#!" class="secondary-content"><i class="material-icons red-text">delete</i></a>
+                        <a href="/users/delete/<%= user._id %>" class="secondary-content"><i class="material-icons red-text">delete</i></a>
                         </li>
                     <% }) %>
                     <% } %>
