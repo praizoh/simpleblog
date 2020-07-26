@@ -90,7 +90,7 @@
     
     
                     <!-- Write A RESPONSE -->
-                    <div class="row" class='logged'>
+                    <div class="row logged">
                       <% var message; %>
                       <% var comment; %>
                       <% if(message) { %> 
@@ -134,11 +134,12 @@
   
                 <% })%>
                 <% } %>
-    
-                
+                <% if(comment.length==0){ %>
+                  <p class="center-align teal-text">No responses for this post</p>
+                <% } %>
     
             </div>
-    
+            
             </section>
         
         <% } %>
