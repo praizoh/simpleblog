@@ -1,0 +1,133 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    .settings-center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    header, main, footer {
+      padding-left: 300px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }
+    .initials{
+            display:inline-block;
+            font-size:1.5em;
+            width:3.5em;
+            height: 3.5em;
+            line-height: 3.5em;
+            text-align:center;
+            border-radius:50%;
+            background:#26a69a;
+            vertical-align:middle;
+            margin-right:1em;
+            color:white;
+        }
+</style>
+
+</head>
+
+<body>
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+      <li><div class="user-view">
+        <div class="background">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTj7OF9EdxNVN6YAkxNcqD00TfMPOD8EpbTZA&usqp=CAU">
+        </div>
+        <a href="#"><img class="circle" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"></a>
+        <a href="#"><span class="white-text name" id='name'></span></a>
+        <a href="#"><span class="white-text email" id="email"></span></a>
+      </div></li>
+      <!-- <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li> -->
+      
+      <li style="margin-top: 50px;"><a href="/dashboard" id="link">Dashboard</a></li>
+      <li><a href="/profile" class="active">My Profile</a></li>
+      <li><a href="/posts">Posts</a></li>
+      <li><a href="/addposts">Add New Posts</a></li>
+      <li><a href="/users" id="isAdmin">Manage Users</a></li>
+      <li><div class="divider"></div></li>
+      <!-- <li><a class="subheader">Subheader</a></li> -->
+      <li><a class="waves-effect" href="/login" onclick="logout()">Logout</a></li>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" style="color:teal">menu</i></a>
+    <main>
+        <% var users; %>
+        <div class="container">
+            <div>
+                <ul class="collection">
+                    <% if(users!=null){ %>
+                    <% users.forEach(function(user) { %>
+                        <li class="collection-item avatar">
+                        <img src="https://materializecss.com/images/yuna.jpg" alt="" class="circle">
+                        <span class="title"><%= user.firstname %> <%= user.lastname  %></span>
+                        <p><%= user.email  %><br>
+                            <%= user.isAdmin %><br>
+                            <%= user.date_created %><br>
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons red-text">delete</i></a>
+                        </li>
+                    <% }) %>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+  <script>
+        
+    document.addEventListener('DOMContentLoaded', function() {
+      var options;
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, options);
+    });
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    });
+    document.getElementById('name').innerHTML=localStorage.getItem('firstname') + ' ' +localStorage.getItem('lastname')
+    document.getElementById('email').innerHTML=localStorage.getItem('email')
+    document.getElementById('token').value = localStorage.getItem('token')
+    document.getElementById('firstname').value = localStorage.getItem('firstname')
+    document.getElementById('lastname').value = localStorage.getItem('lastname')
+    document.getElementById('email2').value = localStorage.getItem('email')
+    document.getElementById('date').value = localStorage.getItem('dateCreated').slice(0,24)
+    const token =localStorage.getItem('token')
+    var link = document.getElementById("link");
+    link.setAttribute('href', `/dashboard?token=${token}`);
+     
+    function logout(){
+      localStorage.clear();
+    
+    }
+
+    // profile
+    const init1 = localStorage.getItem('firstname')
+    const init2 = localStorage.getItem('lastname')
+    document.getElementById('initial').innerHTML=init1.charAt(0) + '.' + init2.charAt(0)
+    // admin ish here
+    const isAdmin = document.getElementById('isAdmin')
+    let admin = localStorage.getItem('isAdmin')
+    if(admin==='false'){
+      isAdmin.style.display = 'none';
+    }
+  </script>
+</body>
+</html> 

@@ -9,8 +9,12 @@ app.use(express.urlencoded({
 }))
 let ejs = require('ejs');
 const mongoose = require('mongoose');
-
 const path = require('path')
+// app.use("./public", express.static(__dirname + '/public'));
+// app.use(express.static('public'))
+app.use('/public', express.static(path.join(__dirname, './public')))
+
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
@@ -18,14 +22,26 @@ app.set('view engine', 'ejs');
 
 require('./app/routes/posts.route')(app) 
 require('./app/routes/users.route')(app) 
+require('./app/routes/comments.routes')(app) 
 
   app.get('/', (req,res)=>{
     res.render('pages/index');   
   })  
-
+ 
   app.get('/addposts', (req,res)=>{  
-    res.render('pages/createposts');
+    res.render('pages/addPosts');
   })
+
+  app.get('/register', (req,res)=>{  
+    res.render('pages/register');
+  })
+  app.get('/login', (req,res)=>{  
+    res.render('pages/login');
+  })
+  app.get('/profile', (req,res)=>{  
+    res.render('pages/profile');
+  })
+  
 
 // Connect to port
 const port = process.env.PORT || 8085       

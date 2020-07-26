@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    .settings-center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+</head>
+
+<body>
+  <nav class="teal">
+    <div class="nav-wrapper">
+      <div class="container">
+        <a href="#" class="brand-logo" style="margin-left:10px">PraizyBlog</a>
+        <a href="#" class="sidenav-trigger" data-target="mobile-link">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/">Home</a></li>
+          
+          <li><a href="/login">Login</a></li>
+        </ul>
+        <ul class="sidenav teal lighten-3" id="mobile-link">
+          <li><a href="/">Home</a></li>
+          
+          <li><a href="/login">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+  <section id="login">
+
+    
+    
+    <div class="container" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col s12 l6 offset-l3">
+                <div class="card-panel">
+                    <h5 class="teal-text center-align">Register</h5>
+                    <% var message; %>
+                    <% var user; %>
+                    <% if(message) { %> 
+                      <p class="teal-text card-title center-align"><%= message %></p> 
+                      <div class="card-action center-align">
+                        <a href="/login" style="color:teal">Login</a>
+                      </div>
+                    <% } %>
+                    <% var error; %>
+                    <% if(error) { %> 
+                      <p class="red-text"><%= error %></p>  
+                    <% } %>
+                    <% if(!message) { %>
+                      <form method="post" action="/users">
+                          <div class="input-field">
+                            <input type="text" id="fname" name="firstname" required>
+                            <label for="fname">Firstname</label>
+                          </div>
+                          <div class="input-field">
+                            <input type="text" id="lname" name="lastname" required>
+                            <label for="fname">Lastname</label>
+                          </div>
+                          <div class="input-field">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email</label>
+                          </div>
+                          <div class="input-field">
+                            <!-- <i class="material-icons prefix">lock</i> -->
+                            <input type="password" id="password" name="password" required>
+                            <label for="password">Password <small>(must be greater than 5 letters)</small></label>
+                            <span class="prefix fa fa-fw fa-eye toggle-password"></span>
+                          </div>
+                          <div class="input-field">
+                            <!-- <i class="material-icons prefix">lock</i> -->
+                            <input type="password" id="cpassword" name="" required>
+                            <label for="cpassword">Confirm Password</label>
+                            <span id='message'></span>
+                            <span class="prefix fa fa-fw fa-eye toggle-password"></span>
+                          </div>
+                          <div class="center-align">
+                            <button type='submit' class="btn teal z-depth-0" id="disabled">Register</button>
+                          </div>
+                      </form>
+                    <% } %>
+                </div>
+                <p class="create-account">Already have an account? <a href="/login">Sign In</a></p>
+                
+            </div>
+        </div>
+
+     </div>
+
+</section>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var options;
+      var elems = document.querySelectorAll('.sidenav')
+      var instances = M.Sidenav.init(elems, options)
+    });
+    $(document).ready(function(){
+      $('#disabled').prop('disabled', true);
+      $('#cpassword').on('keyup', function () {
+        if ($('#password').val() == $('#cpassword').val()) {
+          if ($('#password').val().length>5){
+            $('#disabled').prop('disabled', false);
+          }
+          $('#message').html('Matching').css('color', 'green')
+         
+        } else {
+          $('#disabled').prop('disabled', true);
+          $('#message').html('Not Matching').css('color', 'red')
+        }
+          
+          
+      });
+
+      let user = '<%- JSON.stringify(user) %>'
+      if(user){
+        console.log(user)
+        $('#fname').val(user.firstname)
+        $('#lname').val(user.lastname)
+        $('#email').val(user.email)
+      }else{
+        console.log('no user')
+      }
+    })
+      
+
+    
+  </script>
+</body>
+</html> 

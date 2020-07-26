@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Create Post</title>
+    <title>Edit Post</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
@@ -26,54 +26,77 @@
     <div class="nav-wrapper">
       <div class="container">
         <a href="#" class="brand-logo" style="margin-left:10px">PraizyBlog</a>
+        <a href="#" class="sidenav-trigger" data-target="mobile-link">
+          <i class="material-icons">menu</i>
+        </a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="/posts">Home</a></li>
-          <li><a href="badges.html">Adverts Here</a></li>
-          <li><a href="collapsible.html">Trending Posts</a></li>
+          <li><a href="/addposts">Add Posts</a></li>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/user_auth">Register</a></li>
+          <li><a href="/login">Login</a></li>
+        </ul>
+        <ul class="sidenav teal lighten-3" id="mobile-link">
+          <li><a href="/addposts">Add Posts</a></li>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/user_auth">Register</a></li>
+          <li><a href="/login">Login</a></li>
         </ul>
       </div>
     </div>
   </nav>
-    <div class="container settings-center"> 
-        <h5>Update Post</h5>
+    <div class="container"> 
+      <h5 class="black-text center-align" style="margin-top: 50px; margin-bottom: 20px;">Update Post</h5>
         <div class="row">
             <% var message; %>
               <% if(message) { %> 
-                <p class="teal-text">Post successfully created</p>  
+                <p class="teal-text">Post successfully edited</p>  
               <% } %>
-            <% if(post) { %>
-            <form class="col s12" method="post" action="/posts/update">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="Subject.." id="subject" type="text" name="_id" value="<%= post.id %>">
-                        <label for="first_name">Id</label>
-                    </div>
-                </div>
-              <div class="row">
-                <div class="input-field col s6">
-                    <input placeholder="Subject.." id="subject" type="text" name="subject" value="<%= post.subject %>">
-                    <label for="first_name">Subject</label>
-                </div>
-                
+              <div class="col s12 l6 offset-l3">
+                <% if(post) { %>
+                  
+                  <form class="col s12" method="post" action="/posts/update">
+                    
+                          <div class="input-field">
+                              <input placeholder="Subject.." id="subject" type="text" name="_id" value="<%= post.id %>">
+                              <label for="first_name">Id</label>
+                          </div>
+                      <div class="input-field">
+                          <input placeholder="Subject.." id="subject" type="text" name="subject" value="<%= post.subject %>" required>
+                          <label for="first_name">Subject</label>
+                      </div>
+                      
+                      <div class="input-field">
+                          <textarea placeholder="Body.." id="body" type="text" name="body" class="materialize-textarea" required></textarea>
+                          <!-- <input placeholder="Body.." id="body" type="text" name="body" value="<%= post.body %>" class="materialize-textarea"> -->
+                          <label for="first_name" >Body</label>
+                      </div>
+                    <button class="btn waves-effect waves-light" type="submit">Update
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </form>
+                  <% } %>
               </div>
-              <div class="row">
-                <div class="input-field col s6">
-                    <!-- <textarea placeholder="Body.." id="body" type="text" name="body" value="<%= post.body %>" class="materialize-textarea"></textarea> -->
-                    <input placeholder="Body.." id="body" type="text" name="body" value="<%= post.body %>" class="materialize-textarea">
-                    <label for="first_name">Body</label>
-                </div>
-                
-              </div>
-              <button class="btn waves-effect waves-light" type="submit">Submit
-                <i class="material-icons right">send</i>
-              </button>
-            </form>
-            <% } %>
+            
         </div>
         
     </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var options;
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, options);
+    });
+    // Or with jQuery
+    $(document).ready(function(){
+      $('#body').val('<%= post.body %>');
+      M.textareaAutoResize($('#body'));
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+    })
+    
+          
+  </script>
 </body>
 </html>

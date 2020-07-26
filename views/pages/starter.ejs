@@ -32,8 +32,7 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="/addposts">Add Posts</a></li>
           <li><a href="/dashboard">Dashboard</a></li>
-          <li><a href="/register">Register</a></li>
-          <li><a href="/">Home</a></li>
+          <li><a href="/user_auth">Register</a></li>
           <li><a href="/login">Login</a></li>
         </ul>
         <ul class="sidenav teal lighten-3" id="mobile-link">
@@ -45,36 +44,6 @@
       </div>
     </div>
   </nav>
-  <div class="container"> 
-    <h5 class="black-text center-align" style="margin-top: 50px; margin-bottom: 20px;">Create Post</h5>
-    <div class="row">
-        
-          <% var message; %>
-            <% if(message) { %> 
-              <p class="teal-text">Post successfully updated</p>  
-            <% } %>
-        <div class="col s12 l6 offset-l3">
-          <form method="post" action="/posts">
-              <div class="input-field">
-                  <input placeholder="Subject.." id="subject" type="text" name="subject" required>
-                  <label for="first_name">Subject</label>
-              </div>
-              
-              <div class="input-field">
-                <textarea placeholder="Body.." id="body" type="text" name="body" class="materialize-textarea" required></textarea>
-                <!-- <input placeholder="Body.." id="body" type="text" name="body"> -->
-                <label for="first_name">Body</label>
-              </div>
-              
-            <button class="btn waves-effect waves-light" type="submit" style="margin-top: 20px;">Submit
-              <i class="material-icons right">send</i>
-            </button>
-          </form>
-        </div>
-          
-      </div>
-      
-  </div>
     
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -86,4 +55,4 @@
     });
   </script>
 </body>
-</html>
+</html> 

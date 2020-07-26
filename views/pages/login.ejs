@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sign In</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    .settings-center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+</head>
+
+<body>
+  <nav class="teal">
+    <div class="nav-wrapper">
+      <div class="container">
+        <a href="#" class="brand-logo" style="margin-left:10px">PraizyBlog</a>
+        <a href="#" class="sidenav-trigger" data-target="mobile-link">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/register">Register</a></li>
+          <li><a href="/">Home</a></li>
+        </ul>
+        <ul class="sidenav teal lighten-3" id="mobile-link">
+          
+          <li><a href="/register">Register</a></li>
+          <li><a href="/">Home</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+  <section id="login">
+
+    <!-- <div class="container center-align" style="margin-top: 50px;">
+        <img src="images/recentLogo.png" class="responsive-img" height="50" width="150" alt="logo">
+    </div> -->
+    
+    <div class="container settings-center" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col s12 l6 offset-l3">
+                <div class="card-panel">
+                    <h5 class="teal-text center-align">Login</h5>
+                    <% var error; %>
+                    <% if(error) { %> 
+                      <p class="red-text"><%= error %></p>  
+                    <% } %>
+                    <form method="post" action="/user_auth">
+                        <div class="input-field">
+                            <input type="email" id="email" name="email" required>
+                            <label for="name">Email</label>
+                        </div>
+                        <div class="input-field">
+                          <!-- <i class="material-icons prefix">lock</i> -->
+                          <input type="password" id="password" name="password" required>
+                          <label for="password">Password</label>
+                          <span class="prefix fa fa-fw fa-eye toggle-password"></span>
+                        </div>
+                    
+                        <div class="center-align">
+                          <button class="btn teal z-depth-0" type="submit" id='sub'>Login <span id="spinner"></span></button>
+                        </div>
+                    </form>
+                </div>
+                <p class="create-account">New to PraizyBlog? <a href="/register">Create an account.</a></p>
+                
+            </div>
+        </div>
+
+     </div>
+
+</section>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    // document.getElementById("sub").addEventListener("click", function(event){
+    //   event.preventDefault()
+    // });
+    document.addEventListener('DOMContentLoaded', function() {
+      var options;
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, options);
+    });
+    function login(){
+            
+        let  message =  document.getElementById('subject').value
+        let subject = document.getElementById('body').value
+        let cat = document.getElementById('category').value
+        // alert(message)
+        const headers=  {'authorization':localStorage.getItem('token')}
+        axios.post('http://localhost:8085/posts', {
+            subject: message,
+            body: subject,
+            categories: cat
+        
+        }, {headers:headers})
+        .then(function (response) {
+            
+        })
+        .catch((err)=>{
+            if(err.response.status===401){
+                alert('Your Session is expired, Logout and login again')
+            }
+        })
+        }
+  </script>
+</body>
+</html> 

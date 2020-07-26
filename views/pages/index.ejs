@@ -36,10 +36,18 @@
       <div class="nav-wrapper">
         <div class="container">
           <a href="#" class="brand-logo" style="margin-left:10px">PraizyBlog</a>
+          <a href="#" class="sidenav-trigger" data-target="mobile-link">
+            <i class="material-icons">menu</i>
+          </a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/addposts">Add Posts</a></li>
-            <li><a href="badges.html">Adverts Here</a></li>
-            <li><a href="collapsible.html">Trending Posts</a></li>
+            <li class='logged'><a href="/dashboard" id="link">Dashboard</a></li>
+            <li class="notlogged"><a href="/register">Register</a></li>
+            <li class="notlogged"><a href="/login">Login</a></li>
+          </ul>
+          <ul class="sidenav blue lighten-4" id="mobile-link">
+            <li class="logged"><a href="/dashboard">Dashboard</a></li>
+            <li class="notlogged"><a href="/register">Register</a></li>
+            <li class="notlogged"><a href="/login">Login</a></li>
           </ul>
         </div>
       </div>
@@ -72,15 +80,15 @@
                     <div class="card-image">
                       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpOE8ceTPRKD7D2h4ACvr3NkMCcV2ntDaK3g&usqp=CAU">
                       <!-- <span class="card-title"><%= post.subject %></span> -->
-                      <a class="btn-floating halfway-fab waves-effect waves-light red" href="/posts/<%= post.id %>"><i class="material-icons">edit</i></a>
+                      <!-- <a class="btn-floating halfway-fab waves-effect waves-light red" href="/posts/<%= post.id %>"><i class="material-icons">edit</i></a> -->
                     </div>
                     <div class="card-content" >
                       <span class="card-title" style="height: 60px;"><%= post.subject %></span>
                       <p class="truncate"><%= post.body %></p>
                     </div>
                     <div class="card-action">
-                      <a href="#">View More..</a>
-                      <a class="waves-effect waves-light modal-trigger" href="/posts/delete/<%= post.id %>"><i class="material-icons red-text right right-align">delete</i></a>
+                      <a href="/posts/viewers/<%= post._id %>">View More..</a>
+                      <!-- <a class="waves-effect waves-light modal-trigger" href="/posts/delete/<%= post.id %>"><i class="material-icons red-text right right-align">delete</i></a> -->
                     </div>
                   </div>  
                 </div>
@@ -107,8 +115,7 @@
       </div>
     </div>
     
-    
-    
+
     
 
     <!--JavaScript at end of body for optimized loading-->
@@ -118,9 +125,29 @@
         var elems = document.querySelectorAll('.modal');
         var instances = M.Modal.init(elems);
       });
-
+      document.addEventListener('DOMContentLoaded', function() {
+          var options;
+          var elems = document.querySelectorAll('.sidenav');
+          var instances = M.Sidenav.init(elems, options);
+      });
+      const token =localStorage.getItem('token')
+      var link = document.getElementById("link");
+      link.setAttribute('href', `/dashboard?token=${token}`);
       // Or with jQuery
-
+      // const token = localStorage.getItem('token')
+      console.log(token)
+      if(!token){
+        var logged = document.getElementsByClassName('logged');
+        for (var i = 0; i < logged.length; i ++) {
+          logged[i].style.display = 'none';
+        }
+      }
+      if(token){
+        var logged = document.getElementsByClassName('notlogged');
+        for (var i = 0; i < logged.length; i ++) {
+          logged[i].style.display = 'none';
+        }
+      }
       
             
     </script>

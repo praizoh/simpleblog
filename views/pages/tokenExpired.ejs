@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Create Post</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    .settings-center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+</head>
+
+<body>
+  <nav class="teal">
+    <div class="nav-wrapper">
+      <div class="container">
+        <a href="#" class="brand-logo" style="margin-left:10px">PraizyBlog</a>
+        <a href="#" class="sidenav-trigger" data-target="mobile-link">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          
+          <li><a href="/login" onclick="logout()">Re-Login</a></li>
+        </ul>
+        <ul class="sidenav teal lighten-3" id="mobile-link">
+          
+          <li><a href="/login" onclick="logout()">Re-Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <section>
+      <div class="container">
+        <h1 class="align-center">YOUR SESSION HAS EXPIRED. CLICK RE-LOGIN TO LOGIN AGAIN</h1>
+      </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var options;
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, options);
+    });
+
+    function logout(){
+      localStorage.clear();
+    
+    }
+  </script>
+</body>
+</html> 

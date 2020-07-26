@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Hello There</title>
+
+    <style>
+      .responsive{
+        width: 100%;
+        height:auto;
+      }
+      .banner{
+        background: url(https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60);
+        background-size: cover;
+        background-position: center;
+        /* min-height: 1000px; */
+        height:90vh;
+        opacity: 0.8;
+      }
+      blockquote{
+        margin: 70px;
+        border-left:5px solid white !important;
+        color: whitesmoke;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <nav class="teal">
+      <div class="nav-wrapper">
+        <div class="container">
+          <a href="#" class="brand-logo" style="margin-left:10px">PraizyBlog</a>
+          <a href="#" class="sidenav-trigger" data-target="mobile-link">
+            <i class="material-icons">menu</i>
+          </a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class='logged'><a href="/dashboard" id="link">Dashboard</a></li>
+            <li class="notlogged"><a href="/register">Register</a></li>
+            <li class="notlogged"><a href="/login">Login</a></li>
+          </ul>
+          <ul class="sidenav blue lighten-4" id="mobile-link">
+            <li class="logged"><a href="/dashboard">Dashboard</a></li>
+            <li class="notlogged"><a href="/register">Register</a></li>
+            <li class="notlogged"><a href="/login">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <main>
+        <% if(post) { %>
+          <div class="container">
+  
+            <h4><%=post.subject %></h4>
+    
+            <div style="display: flex; align-items: center;">
+                <div>
+                    <img src="data:image/jpeg;base64,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" alt="personal" width="50" height="50" class="responsive-img circle">
+                </div>
+                <div style="padding-left: 10px;">
+                    <p><%=post.posted_by.firstname %> <%=post.posted_by.lastname %><br/><span><%=post.date_created %></span></p>
+                   
+                </div>
+            </div>
+    
+            <!-- Post image -->
+            <!-- <div style="margin-top: 20px;">
+                <img src="images/vue.png" alt="personal" class="responsive-img">
+            </div> -->
+    
+            <!-- Post context -->
+            <p><%= post.body %></p>
+            
+        </div>  
+        
+            
+    
+            <!-- Response section -->
+            <section>
+    
+                <div class="container">
+    
+                    <h6 style="padding-top: 30px;">Responses</h6>
+    
+    
+                    <!-- Write A RESPONSE -->
+                    <div class="row" class='logged'>
+                      <% var message; %>
+                      <% var comment; %>
+                      <% if(message) { %> 
+                        <p class="teal-text center-align">Your comment has been added!</p>  
+                        
+                      <% } %>
+                        <form class="col s12" method="POST" action="/comments/viewers">
+                        <div class="row">
+                            <div class="input-field col s12">
+                            <textarea id="textarea1" placeholder="Write a response..." class="materialize-textarea" name="comment"></textarea>
+                            </div>
+                            <div class="input-field col s12" hidden>
+                              <input placeholder="Subject.." id="token" type="text" name="token">
+                            </div>
+                            <div class="input-field col s12" hidden>
+                              <input placeholder="Subject.." value="<%= post._id %>" type="text" name="post">
+                            </div>
+                        </div>
+                        <div class="center-align" style="margin-top: -20px;">
+                          <button class="btn z-depth-0" type="submit">Submit</button>
+                        </div>
+                        </form>
+                    </div>
+    
+                <!-- individual response -->
+                <% if(comment!=null){ %>
+                  <% comment.forEach(function(item) { %>
+                <div class="card"> 
+                    <div class="card-content">
+                        <div style="display: flex; align-items: center;">
+                            <div>
+                                <img src="https://materializecss.com/images/yuna.jpg" alt="personal" width="50" height="50" class="responsive-img circle">
+                            </div>
+                            <div style="padding-left: 10px;">
+                                <p><%= item.commented_by.firstname%> <%= item.commented_by.lastname %><br/><span><%= item.date_created %></span></p>   
+                            </div>
+                        </div>
+                        <p style="line-height: 25px;"><%= item.comment %></p>
+                    </div>
+                </div>
+  
+                <% })%>
+                <% } %>
+    
+                
+    
+            </div>
+    
+            </section>
+        
+        <% } %>
+      </main>
+
+   
+     
+    
+
+    
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+      });
+      document.addEventListener('DOMContentLoaded', function() {
+          var options;
+          var elems = document.querySelectorAll('.sidenav');
+          var instances = M.Sidenav.init(elems, options);
+      });
+      const token =localStorage.getItem('token')
+      var link = document.getElementById("link");
+      link.setAttribute('href', `/dashboard?token=${token}`);
+      // Or with jQuery
+      // const token = localStorage.getItem('token')
+      console.log(token)
+      if(!token){
+        var logged = document.getElementsByClassName('logged');
+        for (var i = 0; i < logged.length; i ++) {
+          logged[i].style.display = 'none';
+        }
+      }
+      if(token){
+        var logged = document.getElementsByClassName('notlogged');
+        for (var i = 0; i < logged.length; i ++) {
+          logged[i].style.display = 'none';
+        }
+      }
+      document.getElementById('token').value = localStorage.getItem('token')
+            
+    </script>
+  
+  </body>
+</html>
