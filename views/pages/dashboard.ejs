@@ -127,7 +127,9 @@
     });
     document.getElementById('name').innerHTML=localStorage.getItem('firstname')+ ' ' + localStorage.getItem('lastname')
     document.getElementById('email').innerHTML=localStorage.getItem('email')
-    
+    const token =localStorage.getItem('token')
+    var link = document.getElementById("link");
+    link.setAttribute('href', `/dashboard?token=${token}`);
     // <- setup token into localStorage, (but i think it's not good place for that, and would be better get token with another authorization request)
      
     function logout(){

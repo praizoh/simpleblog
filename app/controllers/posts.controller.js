@@ -94,12 +94,12 @@ exports.viewers = async(req,res)=>{
 }
 exports.delete = async(req,res)=>{
     const {id} = req.params
-    const postedBy = req.decoded.id
+    // const postedBy = req.decoded.id
     try{
       await Post.deleteOne({_id:id})
-      const post =await Post.find({'posted_by':postedBy}).sort({date_created: -1})
+      // const post =await Post.find({'posted_by':postedBy}).sort({date_created: -1})
       res.render('pages/dashboard', {
-        posts: post,   
+        posts: [],   
         message:'You successfully deleted a post'
         
       });
