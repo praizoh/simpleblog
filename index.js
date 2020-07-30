@@ -10,10 +10,10 @@ app.use(express.urlencoded({
 let ejs = require('ejs');
 const mongoose = require('mongoose');
 const path = require('path')
+const Post = require ("./app/models/posts.model")
 // app.use("./public", express.static(__dirname + '/public'));
 // app.use(express.static('public'))
-app.use('/public', express.static(path.join(__dirname, './public')))
-
+app.use(express.static(__dirname + '/public'));
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -25,7 +25,20 @@ require('./app/routes/users.route')(app)
 require('./app/routes/comments.routes')(app) 
 
   app.get('/', (req,res)=>{
-    res.render('pages/index');   
+    Post.find().sort({date_created: -1}).then(
+      (posts)=>{
+        // res.status(200).json({posts})
+        res.render('pages/index', {
+          posts: posts,
+          
+        });
+      }
+    ).catch(
+      (error)=>{
+        res.status(400).json({error:error})
+      }
+    )
+       
   })  
  
   app.get('/addposts', (req,res)=>{  

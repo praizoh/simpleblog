@@ -44,8 +44,8 @@
             <li class="notlogged"><a href="/register">Register</a></li>
             <li class="notlogged"><a href="/login">Login</a></li>
           </ul>
-          <ul class="sidenav blue lighten-4" id="mobile-link">
-            <li class="logged"><a href="/dashboard">Dashboard</a></li>
+          <ul class="sidenav white darken-4" id="mobile-link">
+            <li class="logged"><a href="/dashboard" id="link2">Dashboard</a></li>
             <li class="notlogged"><a href="/register">Register</a></li>
             <li class="notlogged"><a href="/login">Login</a></li>
           </ul>
@@ -166,6 +166,8 @@
       const token =localStorage.getItem('token')
       var link = document.getElementById("link");
       link.setAttribute('href', `/dashboard?token=${token}`);
+      var link2 = document.getElementById("link2");
+      link2.setAttribute('href', `/dashboard?token=${token}`);
       // Or with jQuery
       // const token = localStorage.getItem('token')
       console.log(token)

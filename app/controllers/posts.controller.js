@@ -24,7 +24,6 @@ exports.create = async(req,res)=>{
 }
 
 exports.findAll = async(req,res)=>{
-  console.log(req.headers)
     Post.find().sort({date_created: -1}).then(
       (posts)=>{
         // res.status(200).json({posts})
@@ -95,9 +94,10 @@ exports.viewers = async(req,res)=>{
 }
 exports.delete = async(req,res)=>{
     const {id} = req.params
+    const postedBy = req.decoded.id
     try{
       await Post.deleteOne({_id:id})
-      const post =await Post.find({'posted_by':id}).sort({date_created: -1})
+      const post =await Post.find({'posted_by':postedBy}).sort({date_created: -1})
       res.render('pages/dashboard', {
         posts: post,   
         message:'You successfully deleted a post'

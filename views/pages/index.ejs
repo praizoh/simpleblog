@@ -19,7 +19,7 @@
         background-size: cover;
         background-position: center;
         /* min-height: 1000px; */
-        height:90vh;
+        height:40vh;
         opacity: 0.8;
       }
       blockquote{
@@ -44,8 +44,8 @@
             <li class="notlogged"><a href="/register">Register</a></li>
             <li class="notlogged"><a href="/login">Login</a></li>
           </ul>
-          <ul class="sidenav blue lighten-4" id="mobile-link">
-            <li class="logged"><a href="/dashboard">Dashboard</a></li>
+          <ul class="sidenav white" id="mobile-link">
+            <li class="logged"><a href="/dashboard" id="link2">Dashboard</a></li>
             <li class="notlogged"><a href="/register">Register</a></li>
             <li class="notlogged"><a href="/login">Login</a></li>
           </ul>
@@ -56,15 +56,15 @@
       <div class="right">
         <span class="valign-wrapper">
           <blockquote>
-            Hi! I am Akande Oremei Praise. I am a fullstack developer.<br> Passionate about coding, writing and acquiring knowledge.
+            You love making expressions through writing?<br> PraizyBlog gives you the targeted audience. So speak!
           </blockquote>
         </span>
-        <div class="center-align">
+        <!-- <div class="center-align">
           <a class="btn waves-effect waves-light" type="submit" href="/posts">View Posts
           </a>
           <button class="btn waves-effect waves-light" type="submit"> Check my works!
           </button>
-        </div>
+        </div> -->
         
       </div>
     </div>
@@ -79,7 +79,7 @@
                   <div class="card">
                     <div class="card-image">
                       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpOE8ceTPRKD7D2h4ACvr3NkMCcV2ntDaK3g&usqp=CAU">
-                      <!-- <span class="card-title"><%= post.subject %></span> -->
+                      <!-- <span class="card-title"><%= post.subject %></span>  -->
                       <!-- <a class="btn-floating halfway-fab waves-effect waves-light red" href="/posts/<%= post.id %>"><i class="material-icons">edit</i></a> -->
                     </div>
                     <div class="card-content" >
@@ -88,7 +88,7 @@
                     </div>
                     <div class="card-action">
                       <a href="/posts/viewers/<%= post._id %>">View More..</a>
-                      <!-- <a class="waves-effect waves-light modal-trigger" href="/posts/delete/<%= post.id %>"><i class="material-icons red-text right right-align">delete</i></a> -->
+                      <a class="waves-effect waves-light modal-trigger adminLogged" href="/posts/delete/<%= post.id %>" ><i class="material-icons red-text right right-align">delete</i></a>
                     </div>
                   </div>  
                 </div>
@@ -133,6 +133,8 @@
       const token =localStorage.getItem('token')
       var link = document.getElementById("link");
       link.setAttribute('href', `/dashboard?token=${token}`);
+      var link2 = document.getElementById("link2");
+      link2.setAttribute('href', `/dashboard?token=${token}`);
       // Or with jQuery
       // const token = localStorage.getItem('token')
       console.log(token)
@@ -148,6 +150,19 @@
           logged[i].style.display = 'none';
         }
       }
+
+    // admin ish here
+    let admin = localStorage.getItem('isAdmin')
+    // for (var i = 0; i < adminLogged.length; i ++) {
+      if(admin==='false'){
+        const adminLogged = document.getElementsByClassName('adminLogged')
+
+        for (var i = 0; i < adminLogged.length; i ++) {
+          adminLogged[i].style.display = 'none';
+        }
+      }
+    // }
+   
       
             
     </script>

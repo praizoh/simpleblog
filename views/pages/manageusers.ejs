@@ -57,7 +57,7 @@
       </div></li>
       <!-- <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li> -->
       
-      <li style="margin-top: 50px;"><a href="/dashboard" id="link">Dashboard</a></li>
+      <li style="margin-top: 50px;"><a href="/dashboard" id="link2">Dashboard</a></li>
       <li><a href="/profile" class="active">My Profile</a></li>
       <li><a href="/posts">Posts</a></li>
       <li><a href="/addposts">Add New Posts</a></li>
@@ -66,11 +66,14 @@
       <!-- <li><a class="subheader">Subheader</a></li> -->
       <li><a class="waves-effect" href="/login" onclick="logout()">Logout</a></li>
     </ul>
-    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" style="color:teal">menu</i></a>
+    <div class="container" style="margin-top: 20px;">
+      <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" style="color:teal">menu</i></a>
+
+    </div>
     <main>
         <% var users; %>
         <div class="container">
-            <h4 class="teal-text">MANAGE USERS</h4>
+            <h5 class="teal-text">Manage Users</h5>
             <div>
                 <% var message; %>
                 <% if(message) { %> 
@@ -80,7 +83,7 @@
                     <% if(users!=null){ %>
                     <% users.forEach(function(user) { %>
                         <li class="collection-item avatar">
-                        <img src="https://materializecss.com/images/yuna.jpg" alt="" class="circle">
+                        <img src="/images/profile_pic.svg" alt="" class="circle">
                         <span class="title">Fullname: <%= user.firstname %> <%= user.lastname  %></span>
                         <p>Email: <%= user.email  %><br>
                            Admin: <%= user.isAdmin %><br>
@@ -109,30 +112,23 @@
     });
     document.getElementById('name').innerHTML=localStorage.getItem('firstname') + ' ' +localStorage.getItem('lastname')
     document.getElementById('email').innerHTML=localStorage.getItem('email')
-    document.getElementById('token').value = localStorage.getItem('token')
-    document.getElementById('firstname').value = localStorage.getItem('firstname')
-    document.getElementById('lastname').value = localStorage.getItem('lastname')
-    document.getElementById('email2').value = localStorage.getItem('email')
-    document.getElementById('date').value = localStorage.getItem('dateCreated').slice(0,24)
     const token =localStorage.getItem('token')
-    var link = document.getElementById("link");
-    link.setAttribute('href', `/dashboard?token=${token}`);
+    var link2 = document.getElementById("link2");
+    link2.setAttribute('href', `/dashboard?token=${token}`);
+    
      
     function logout(){
       localStorage.clear();
     
     }
 
-    // profile
-    const init1 = localStorage.getItem('firstname')
-    const init2 = localStorage.getItem('lastname')
-    document.getElementById('initial').innerHTML=init1.charAt(0) + '.' + init2.charAt(0)
-    // admin ish here
+   // admin ish here
     const isAdmin = document.getElementById('isAdmin')
     let admin = localStorage.getItem('isAdmin')
     if(admin==='false'){
       isAdmin.style.display = 'none';
     }
+    
   </script>
 </body>
 </html> 
