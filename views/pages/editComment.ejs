@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Edit Posts</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    .settings-center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+
+    
+</style>
+
+</head>
+
+<body>
+    <nav class="teal">
+        <div class="nav-wrapper">
+          <div class="container">
+            <a href="#" class="brand-logo" style="margin-left:10px">PraizyBlog</a>
+            <a href="#" class="sidenav-trigger" data-target="mobile-link">
+              <i class="material-icons">menu</i>
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li class='logged'><a href="/dashboard" id="link">Dashboard</a></li>
+              <li class="notlogged"><a href="/register">Register</a></li>
+              <li class="notlogged"><a href="/login">Login</a></li>
+              <li ><a href="/">Home</a></li>
+            </ul>
+            <ul class="sidenav white darken-4" id="mobile-link">
+              <li class="logged"><a href="/dashboard" id="link2">Dashboard</a></li>
+              <li class="notlogged"><a href="/register">Register</a></li>
+              <li class="notlogged"><a href="/login">Login</a></li>
+              <li ><a href="/">Home</a></li>
+            </ul>
+          </div>
+        </div>
+    </nav> 
+    <main>
+        <% var comment; %>
+        
+        <div class="container"> 
+            <h5 class="black-text center-align" style="margin-top: 50px; margin-bottom: 20px;">Update Post</h5>
+              <div class="row">
+                  <% var message; %>
+                    <% if(message) { %> 
+                      <p class="teal-text center-align"><%= message %></p>  
+                    <% } %>
+                    <div class="col s12 l6 offset-l3">
+                      <% if(comment) { %>
+                        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+                        <script>
+                           
+                          $(document).ready(function(){
+                          $('#comment').val("<%= comment.comment %>");
+                          M.textareaAutoResize($('#comment'));
+                  
+                        })
+                        </script>
+                        <form class="col s12" method="post" action="/comment/update">
+                          
+                                <div class="input-field" hidden>
+                                    <input placeholder="Subject.." id="id" type="text" name="_id" value="<%= comment._id %>">
+                                    <label for="id">Id</label>
+                                </div>
+                                <div class="input-field" hidden>
+                                  <input placeholder="User.." id="token" type="text" name="token">
+                                </div>
+                            <div class="input-field">
+                                <input placeholder="Comment.." id="comment_by" type="text" name="comment_by" value="<%= comment.commented_by.email %>" required readonly>
+                                <label for="comment_by">Commented By</label>
+                            </div>
+                            
+                            <div class="input-field">
+                                <textarea placeholder="Comment.." id="comment" type="text" name="comment" class="materialize-textarea"  required></textarea>
+                                <label for="comment" >Comment</label>
+                            </div>
+                          <button class="btn waves-effect waves-light" type="submit">Update
+                            <i class="material-icons right">send</i>
+                          </button>
+                        </form>
+                        <% } %>
+                    </div>
+                  
+              </div>
+              
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+  <script>
+      
+      
+    document.addEventListener('DOMContentLoaded', function() {
+      var options;
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, options);
+    });
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    });
+    const token =localStorage.getItem('token')
+      var link = document.getElementById("link");
+      link.setAttribute('href', `/dashboard?token=${token}`);
+        function logout(){
+            localStorage.clear();
+    
+        }
+        if(!token){
+        var logged = document.getElementsByClassName('logged');
+        for (var i = 0; i < logged.length; i ++) {
+          logged[i].style.display = 'none';
+        }
+      }
+      if(token){
+        var logged = document.getElementsByClassName('notlogged');
+        for (var i = 0; i < logged.length; i ++) {
+          logged[i].style.display = 'none';
+        }
+      }
+    
+    // <- setup token into localStorage, (but i think it's not good place for that, and would be better get token with another authorization request)
+    document.getElementById('token').value = localStorage.getItem('token')
+     
+    
+
+   
+  </script>
+</body>
+</html> 

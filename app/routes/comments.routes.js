@@ -13,7 +13,9 @@ module.exports = app =>{
     app.get("/comments", verifyToken, comments.findAll)
 
     // update a comment
-    app.put("/comments", verifyToken, comments.update)
+    app.get("/comment/update/:id", comments.findOneToUpdate)
+
+    app.post("/comment/update", comments.update)
 
     // delete a comment
     app.delete("/comments/:id", verifyToken, comments.delete)

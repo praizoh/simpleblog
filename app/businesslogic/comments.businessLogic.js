@@ -21,7 +21,8 @@ Comment.update = async(commen)=>{
     commentupdate = new Comments({comment, _id}); 
     try{
         
-        const updateComment = await Users.updateOne({_id}, commentupdate)
+        const updateComment = await Comments.updateOne({_id}, commentupdate)
+        console.log(updateComment)
         return updateComment
     }catch(err){
         console.log(err)
@@ -43,7 +44,7 @@ Comment.delete = async(id)=>{
 
 Comment.findOne = async(id)=>{
     try{
-        const comment = await Comments.findOne({_id:id})
+        const comment = await Comments.findOne({_id:id}).populate('commented_by')
         return comment
     }catch(err){
         console.log(err)

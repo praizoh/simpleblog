@@ -154,7 +154,7 @@
     // admin ish here
     let admin = localStorage.getItem('isAdmin')
     // for (var i = 0; i < adminLogged.length; i ++) {
-      if(admin==='false'){
+      if(admin==='false' || !admin || admin==='' || admin===null){
         const adminLogged = document.getElementsByClassName('adminLogged')
 
         for (var i = 0; i < adminLogged.length; i ++) {

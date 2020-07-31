@@ -84,7 +84,7 @@ exports.viewers = async(req,res)=>{
     // console.log(comment)
     res.render('pages/viewersPost', {
       post: post,  
-      comment:comment 
+      comment:comment   
     })
   }catch(err){
     res.status(500).send(err)

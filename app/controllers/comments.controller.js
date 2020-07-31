@@ -88,7 +88,31 @@ exports.findOne = async(req,res)=>{
     
     
 } 
-
+exports.findOneToUpdate = async(req,res)=>{
+    console.log(req.body)
+    const { id } = req.params
+    if(id){
+        try{ 
+            const comment = await Comment.findOne(id)
+            console.log(comment)
+            if(comment._id){
+                res.render('pages/editComment', {
+                    comment: comment,  
+                })
+            }else{
+            
+            }
+            
+        }catch(err){
+            console.log(err)
+            res.status(500).send({message:err})
+        }
+    }else{
+        res.status(400).send({message:'Required fields cannot be empty'})
+    }
+    
+    
+}
 // get all comments
 exports.findAll = async(req,res)=>{
    
@@ -109,13 +133,19 @@ exports.findAll = async(req,res)=>{
     
 }
 
-// update a user
+// update a comment
 exports.update = async(req,res)=>{
+    console.log(req.body)
     const {comment, _id } = req.body
-    if(comment, _id){
+    const comm = {comment, _id}
+    if(comment && _id){
         try{
-            await Comment.update()
-            res.status(200).send({message:'Comment updated'})            
+            await Comment.update(comm)
+            let msg = 'Comment successfully updated' 
+            res.render('pages/editComment', { 
+                message: msg,
+            
+            });            
             
         }catch(err){
             console.log(err)
