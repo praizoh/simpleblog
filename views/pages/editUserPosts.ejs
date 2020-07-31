@@ -141,7 +141,7 @@
     // admin ish here
     const isAdmin = document.getElementById('isAdmin')
     let admin = localStorage.getItem('isAdmin')
-    if(admin==='false'){
+    if(admin==='false' || admin===null){
       isAdmin.style.display = 'none';
     }
     // <- setup token into localStorage, (but i think it's not good place for that, and would be better get token with another authorization request)

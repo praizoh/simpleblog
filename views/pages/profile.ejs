@@ -189,7 +189,7 @@
     // admin ish here
     const isAdmin = document.getElementById('isAdmin')
     let admin = localStorage.getItem('isAdmin')
-    if(admin==='false'){
+    if(admin==='false' || admin===null){
       isAdmin.style.display = 'none';
     }
   </script>
